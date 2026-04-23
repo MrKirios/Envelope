@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Invitation</title>
+<link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Secular+One&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --wood-1:#8b5a2b;
+    --wood-2:#7a4e23;
+    --paper:#fbf8ef;
+    --envelope:#b73c2a;
+    --shadow:rgba(0,0,0,0.35);
+  }
+  html,body{height:100%;margin:0;font-family: 'Secular One', sans-serif;background:#7a4e23;}
+  /* WOODEN PLANK BACKGROUND */
+  body{
+    background:
+      url('https://images.stockcake.com/public/c/8/f/c8f146c1-4f21-428a-a416-813f04114257_large/sealed-envelope-displayed-stockcake.jpg') center/cover no-repeat,
+      repeating-linear-gradient(0deg, rgba(0,0,0,0.03) 0 1px, transparent 1px 20px),
+      repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0 2px, transparent 2px 60px),
+      linear-gradient(180deg,var(--wood-1),var(--wood-2));
+    display:flex;align-items:center;justify-content:center;
+    padding:40px;
+    box-sizing:border-box;
+  }
+
+  /* Container */
+  .desk{position:relative;width:900px;max-width:96vw;height:600px;max-height:80vh;display:flex;align-items:center;justify-content:center;}
+  /* Envelope */
+  .envelope{
+    position:relative;width:420px;height:250px;cursor:pointer;transition:transform 0.5s;transform-origin:center;
+  }
+  .envelope .body{
+    width:100%;height:60%;background:linear-gradient(180deg,#d8624b,#b73c2a);border-radius:4px 4px 6px 6px;
+    position:absolute;bottom:0;left:0;z-index:1;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;
+    letter-spacing:1px;
+  }
+  .envelope .seal{
+    position:absolute;top:40%;left:50%;transform:translate(-50%,-50%);width:68px;height:68px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;font-family:'Indie Flower',cursive;font-size:20px;color:#7b2d20;
+  }
+  /* flap */
+  .envelope .flap{
+    position:absolute;top:0;left:0;right:0;height:60%;background:linear-gradient(180deg,#ef6f58,#d24b37);
+    clip-path: polygon(0 0, 100% 0, 50% 70%);
+    z-index:3;transition:transform 0.8s cubic-bezier(.2,.9,.2,1);
+    display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Indie Flower',cursive;font-size:22px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.25);
+  }
+  .envelope.open .flap{transform:translateY(-150%);}
+  .envelope.open{transform:scale(0.95);}
+
+  /* Letter */
+  .letter{
+    position:absolute;left:50%;top:50%;transform:translate(-50%,-60%) scale(0.6);width:540px;height:620px;
+    /* light paper overlay above the texture; lower alpha so texture is visible */
+    background: linear-gradient(rgba(251,248,239,0.75), rgba(251,248,239,0.75)),
+                url('https://i.pinimg.com/736x/2a/a3/9a/2aa39a7c6b90c1e2a747c31f1e21824e.jpg') center/cover no-repeat;
+    /* blend layers so the paper tint mixes with the grunge texture */
+    background-blend-mode: normal;
+    box-shadow:0 20px 60px rgba(0,0,0,0.45);border-radius:6px;padding:48px 48px 36px;z-index:-1;opacity:0;transition:opacity 0.6s, transform 0.7s;
+    overflow:hidden;
+    font-family:'Indie Flower',cursive;font-size:20px;color:#2c2c2c;line-height:1.3;font-weight: bold;
+  }
+  .envelope.open ~ .letter{opacity:1;transform:translate(-50%,-50%) scale(1);z-index:4;}
+
+  /* hand-ruled lines */
+  .letter::before{
+    content:"";position:absolute;left:36px;right:36px;top:120px;bottom:36px;
+    background-image: repeating-linear-gradient(transparent, transparent 24px, rgba(0,0,0,0.03) 25px);
+    opacity:0.25;pointer-events:none;
+  }
+
+  /* letter content layout */
+  .letter .content{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;}
+  .letter .greeting{font-size:28px;margin-bottom:8px;}
+  .letter .body-text{font-size:20px;margin-bottom:12px;}
+  .letter .illegible{opacity:0.6;max-height:140px;overflow:hidden;margin-bottom:18px;}
+  .letter .closing{margin-top:auto;font-size:18px;}
+
+  /* signature area */
+  .sig-area{margin-top:12px;border-top:1px dashed rgba(0,0,0,0.12);padding-top:16px;display:flex;align-items:center;gap:16px;}
+  .sig-box{height:72px;flex:1;background:transparent;display:flex;align-items:center;cursor:pointer;position:relative;}
+  .sig-placeholder{color:rgba(0,0,0,0.2);font-size:18px;}
+  .sig-text{font-family:'Indie Flower',cursive;font-size:28px;color:#2c2c2c;white-space:nowrap;overflow:hidden;}
+  .sig-box:active{transform:scale(0.995);}
+
+  /* small responsive tweaks */
+  @media (max-width:720px){
+    .letter{width:88vw;height:86vh;padding:32px;font-size:18px;}
+    .envelope{width:340px;height:200px;}
+  }
+
+</style>
+</head>
+<body>
+  <div class="desk">
+    <div class="envelope" id="envelope" title="Click to open">
+    </div>
+
+    <div class="letter" id="letter" aria-hidden="true">
+      <div class="content">
+        <div class="greeting" id="greeting">Dear {{Username}}.</div>
+        <div class="body-text">
+You are cordially invited to attend a private reunion among trusted associates.
+        </div>
+        <div class="illegible" aria-hidden="true">
+          <!-- doodle-style placeholder strokes to represent illegible handwriting -->
+          <svg viewBox="10 10 520 140" width="100%" height="100%" preserveAspectRatio="none" role="img" aria-label="illegible scribbles">
+            <g fill="none" stroke="#2c2c2c" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0.75">
+              <path d="M12 20 C70 10, 110 30, 170 22 C230 14, 270 30, 330 24 C390 18, 430 34, 504 26" stroke-width="6" />
+              <path d="M12 46 C60 40, 110 60, 170 50 C220 42, 270 56, 330 48 C380 40, 430 58, 504 50" stroke-width="6" />
+              <path d="M12 78 C72 66, 120 86, 170 74 C220 62, 280 84, 330 72 C380 60, 430 86, 504 74" stroke-width="6" />
+              <path d="M12 106 C80 96, 120 118, 170 104 C220 90, 270 116, 330 100 C380 86, 430 120, 504 102" stroke-width="6" />
+              <!-- small scribble accents -->
+              <path d="M30 34 q8 -6 18 0 q8 6 18 0" stroke-width="3" stroke-opacity="0.45" />
+              <path d="M340 62 q10 -8 22 0 q10 8 22 0" stroke-width="3" stroke-opacity="0.45" />
+            </g>
+          </svg>
+        </div>
+        <div class="body-text">
+Discretion is expected, and presence is requested with utmost sincerity.
+        </div>
+        <div class="illegible" aria-hidden="true">
+          <!-- doodle-style placeholder strokes to represent illegible handwriting -->
+          <svg viewBox="10 10 520 140" width="100%" height="100%" preserveAspectRatio="none" role="img" aria-label="illegible scribbles">
+            <g fill="none" stroke="#2c2c2c" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0.75">
+              <path d="M12 20 C70 10, 110 30, 170 22 C230 14, 270 30, 330 24 C390 18, 430 34, 504 26" stroke-width="6" />
+              <path d="M12 46 C60 40, 110 60, 170 50 C220 42, 270 56, 330 48 C380 40, 430 58, 504 50" stroke-width="6" />
+              <path d="M12 78 C72 66, 120 86, 170 74 C220 62, 280 84, 330 72 C380 60, 430 86, 504 74" stroke-width="6" />
+              <path d="M12 106 C80 96, 120 118, 170 104 C220 90, 270 116, 330 100 C380 86, 430 120, 504 102" stroke-width="6" />
+              <!-- small scribble accents -->
+              <path d="M30 34 q8 -6 18 0 q8 6 18 0" stroke-width="3" stroke-opacity="0.45" />
+              <path d="M340 62 q10 -8 22 0 q10 8 22 0" stroke-width="3" stroke-opacity="0.45" />
+            </g>
+          </svg>
+        </div>
+        <div class="closing">
+          To confirm your presence, sign this letter and send it back.
+          <div class="sig-area">
+            <div class="sig-box" id="sigBox" title="Click to sign">
+              <div class="sig-text" id="sigText"><span class="sig-placeholder" id="sigPlaceholder">click here to sign</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+(function(){
+  // Config: Replace with your discord invite link (must be a full URL)
+  const DISCORD_INVITE = "https://discord.gg/gjDpX49vrW";
+
+  const envelope = document.getElementById('envelope');
+  const letter = document.getElementById('letter');
+  const greeting = document.getElementById('greeting');
+  const sigBox = document.getElementById('sigBox');
+  const sigText = document.getElementById('sigText');
+  const sigPlaceholder = document.getElementById('sigPlaceholder');
+
+  // get username from query param ?username= or prompt if missing
+  function getUsername(){
+    const params = new URLSearchParams(location.search);
+    let u = params.get('username');
+    if(u && u.trim()) return sanitize(u.trim());
+    u = localStorage.getItem('inv_username');
+    if(u) return sanitize(u);
+    u = prompt("Please enter your name for the invitation:", "");
+    if(u && u.trim()){
+      u = sanitize(u.trim());
+      localStorage.setItem('inv_username', u);
+      return u;
+    }
+    return "Guest";
+  }
+  function sanitize(s){
+    return s.replace(/[^a-zA-Z0-9 \-_.]/g,'').slice(0,32);
+  }
+
+  const username = getUsername();
+  greeting.textContent = `Dear ${username}.`;
+
+  // Envelope open toggle
+  envelope.addEventListener('click', ()=> {
+    envelope.classList.add('open');
+    // small delay for flap to move before bringing letter forward
+    setTimeout(()=> { letter.setAttribute('aria-hidden','false'); }, 200);
+  });
+
+  // Signature click -> animate handwriting of username, then redirect
+  let signed = false;
+  sigBox.addEventListener('click', ()=> {
+    if(signed) return;
+    signed = true;
+    sigPlaceholder && sigPlaceholder.remove();
+    sigText.textContent = "";
+    // handwriting-like typing animation with small random timing
+    const text = username;
+    let i = 0;
+    function step(){
+      if(i >= text.length){
+        // small flourish delay then redirect
+        setTimeout(()=> { window.location.href = DISCORD_INVITE; }, 700);
+        return;
+      }
+      // append next char
+      sigText.textContent += text[i++];
+      // random small delay to feel handwritten
+      setTimeout(step, 80 + Math.floor(Math.random()*120));
+    }
+    step();
+  });
+
+  // allow pressing Enter on envelope for accessibility
+  envelope.addEventListener('keydown', (e)=>{ if(e.key === 'Enter' || e.key === ' ') envelope.click(); });
+  envelope.tabIndex = 0;
+})();
+</script>
+</body>
+</html>
