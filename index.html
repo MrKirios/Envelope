@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Invitation</title>
+<title>Invitación</title>
 <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Secular+One&display=swap" rel="stylesheet">
 <style>
   :root{
@@ -75,17 +75,9 @@
 
   /* letter content layout */
   .letter .content{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;}
-  .letter .greeting{font-size:28px;margin-bottom:8px;}
-  .letter .body-text{font-size:20px;margin-bottom:12px;}
-  .letter .illegible{opacity:0.6;max-height:140px;overflow:hidden;margin-bottom:18px;}
-  .letter .closing{margin-top:auto;font-size:18px;}
-
-  /* signature area */
-  .sig-area{margin-top:12px;border-top:1px dashed rgba(0,0,0,0.12);padding-top:16px;display:flex;align-items:center;gap:16px;}
-  .sig-box{height:72px;flex:1;background:transparent;display:flex;align-items:center;cursor:pointer;position:relative;}
-  .sig-placeholder{color:rgba(0,0,0,0.2);font-size:18px;}
-  .sig-text{font-family:'Indie Flower',cursive;font-size:28px;color:#2c2c2c;white-space:nowrap;overflow:hidden;}
-  .sig-box:active{transform:scale(0.995);}
+  .letter .content{gap:38px;}
+  .letter p{margin:0;}
+  .letter .signature{margin-top:auto;}
 
   /* small responsive tweaks */
   @media (max-width:720px){
@@ -102,49 +94,11 @@
 
     <div class="letter" id="letter" aria-hidden="true">
       <div class="content">
-        <div class="greeting" id="greeting">Dear {{Username}}.</div>
-        <div class="body-text">
-You are cordially invited to attend a private reunion among trusted associates.
-        </div>
-        <div class="illegible" aria-hidden="true">
-          <!-- doodle-style placeholder strokes to represent illegible handwriting -->
-          <svg viewBox="10 10 520 140" width="100%" height="100%" preserveAspectRatio="none" role="img" aria-label="illegible scribbles">
-            <g fill="none" stroke="#2c2c2c" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0.75">
-              <path d="M12 20 C70 10, 110 30, 170 22 C230 14, 270 30, 330 24 C390 18, 430 34, 504 26" stroke-width="6" />
-              <path d="M12 46 C60 40, 110 60, 170 50 C220 42, 270 56, 330 48 C380 40, 430 58, 504 50" stroke-width="6" />
-              <path d="M12 78 C72 66, 120 86, 170 74 C220 62, 280 84, 330 72 C380 60, 430 86, 504 74" stroke-width="6" />
-              <path d="M12 106 C80 96, 120 118, 170 104 C220 90, 270 116, 330 100 C380 86, 430 120, 504 102" stroke-width="6" />
-              <!-- small scribble accents -->
-              <path d="M30 34 q8 -6 18 0 q8 6 18 0" stroke-width="3" stroke-opacity="0.45" />
-              <path d="M340 62 q10 -8 22 0 q10 8 22 0" stroke-width="3" stroke-opacity="0.45" />
-            </g>
-          </svg>
-        </div>
-        <div class="body-text">
-Discretion is expected, and presence is requested with utmost sincerity.
-        </div>
-        <div class="illegible" aria-hidden="true">
-          <!-- doodle-style placeholder strokes to represent illegible handwriting -->
-          <svg viewBox="10 10 520 140" width="100%" height="100%" preserveAspectRatio="none" role="img" aria-label="illegible scribbles">
-            <g fill="none" stroke="#2c2c2c" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0.75">
-              <path d="M12 20 C70 10, 110 30, 170 22 C230 14, 270 30, 330 24 C390 18, 430 34, 504 26" stroke-width="6" />
-              <path d="M12 46 C60 40, 110 60, 170 50 C220 42, 270 56, 330 48 C380 40, 430 58, 504 50" stroke-width="6" />
-              <path d="M12 78 C72 66, 120 86, 170 74 C220 62, 280 84, 330 72 C380 60, 430 86, 504 74" stroke-width="6" />
-              <path d="M12 106 C80 96, 120 118, 170 104 C220 90, 270 116, 330 100 C380 86, 430 120, 504 102" stroke-width="6" />
-              <!-- small scribble accents -->
-              <path d="M30 34 q8 -6 18 0 q8 6 18 0" stroke-width="3" stroke-opacity="0.45" />
-              <path d="M340 62 q10 -8 22 0 q10 8 22 0" stroke-width="3" stroke-opacity="0.45" />
-            </g>
-          </svg>
-        </div>
-        <div class="closing">
-          To confirm your presence, sign this letter and send it back.
-          <div class="sig-area">
-            <div class="sig-box" id="sigBox" title="Click to sign">
-              <div class="sig-text" id="sigText"><span class="sig-placeholder" id="sigPlaceholder">click here to sign</span></div>
-            </div>
-          </div>
-        </div>
+        <p>Estimados Xiao, Hermes, Aprendiz de Erilune, Asarael y Uldren Sov,</p>
+        <p>He escuchado de sus recientes aventuras en mis dominios, y deseo conocer a aquellos que llegaron a mi amada tierra de Barovia. Por esto, les invito a una cena en mi castillo para podernos reunir en un entorno civilizado.</p>
+        <p>Espero su asistencia al anochecer de la primer noche de la última luz de la luna, en 10 días, Su pasaje hacia y desde mi hogar será uno seguro, y ustedes serán considerados invitados de honor por tanto permanezcan en el Castillo Ravenloft.</p>
+        <p>Mi carruaje les esperará en el cruce de caminos de Ravenloft, pasando la Puerta Oeste. Espero su llegada.</p>
+        <p class="signature">Vuestro anfitrión,<br>Strahd von Zarovich.</p>
       </div>
     </div>
   </div>
@@ -152,67 +106,13 @@ Discretion is expected, and presence is requested with utmost sincerity.
   
 <script>
 (function(){
-  // Config: Replace with your discord invite link (must be a full URL)
-  const DISCORD_INVITE = "https://discord.gg/gjDpX49vrW";
-
   const envelope = document.getElementById('envelope');
   const letter = document.getElementById('letter');
-  const greeting = document.getElementById('greeting');
-  const sigBox = document.getElementById('sigBox');
-  const sigText = document.getElementById('sigText');
-  const sigPlaceholder = document.getElementById('sigPlaceholder');
-
-  // get username from query param ?username= or prompt if missing
-  function getUsername(){
-    const params = new URLSearchParams(location.search);
-    let u = params.get('username');
-    if(u && u.trim()) return sanitize(u.trim());
-    u = localStorage.getItem('inv_username');
-    if(u) return sanitize(u);
-    u = prompt("Please enter your name for the invitation:", "");
-    if(u && u.trim()){
-      u = sanitize(u.trim());
-      localStorage.setItem('inv_username', u);
-      return u;
-    }
-    return "Guest";
-  }
-  function sanitize(s){
-    return s.replace(/[^a-zA-Z0-9 \-_.]/g,'').slice(0,32);
-  }
-
-  const username = getUsername();
-  greeting.textContent = `Dear ${username}.`;
-
   // Envelope open toggle
   envelope.addEventListener('click', ()=> {
     envelope.classList.add('open');
     // small delay for flap to move before bringing letter forward
     setTimeout(()=> { letter.setAttribute('aria-hidden','false'); }, 200);
-  });
-
-  // Signature click -> animate handwriting of username, then redirect
-  let signed = false;
-  sigBox.addEventListener('click', ()=> {
-    if(signed) return;
-    signed = true;
-    sigPlaceholder && sigPlaceholder.remove();
-    sigText.textContent = "";
-    // handwriting-like typing animation with small random timing
-    const text = username;
-    let i = 0;
-    function step(){
-      if(i >= text.length){
-        // small flourish delay then redirect
-        setTimeout(()=> { window.location.href = DISCORD_INVITE; }, 700);
-        return;
-      }
-      // append next char
-      sigText.textContent += text[i++];
-      // random small delay to feel handwritten
-      setTimeout(step, 80 + Math.floor(Math.random()*120));
-    }
-    step();
   });
 
   // allow pressing Enter on envelope for accessibility
